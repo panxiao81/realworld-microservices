@@ -1,0 +1,45 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/realworld-users
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        default_batch_fetch_size: 500
+  application:
+    name: users
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://sso.home.ddupan.top/realms/dev
+      client:
+        registration:
+          keycloak:
+            client-id: realworld
+            client-secret: 0sD54QUaqsUEpWmERwdHbmdgbA7dqJHV
+            authorization-grant-type: client_credentials
+        provider:
+          keycloak:
+            issuer-uri: https://sso.home.ddupan.top/realms/dev
+
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,metrics,openapi,swagger-ui"
+springdoc:
+  swagger-ui:
+    oauth:
+      client-id: realworld
+      client-secret: 0sD54QUaqsUEpWmERwdHbmdgbA7dqJHV
+  oauth-flow:
+    token: https://sso.home.ddupan.top/realms/dev/protocol/openid-connect/token
+    auth: https://sso.home.ddupan.top/realms/dev/protocol/openid-connect/auth

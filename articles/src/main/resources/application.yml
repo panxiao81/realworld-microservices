@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/realworld-article
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        default_batch_fetch_size: 500
+  application:
+    name: articles
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,metrics"
